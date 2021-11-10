@@ -9,18 +9,17 @@ import java.util.Random;
 public class Paquete 
 {
     private Random generador;
-    private Dimension dimension;
-    private double peso;
+    private Dimension dimension; //cm
+    private double peso; //kg
 
     /**
      * Constructor 1 sin parámetros
      * Crea el paquete con 40 , 30, 50 de
      * alto, ancho, largo (en cm) y peso 8 Kg
      */
-    public Paquete()    {
-        //TODO
-         
-
+    public Paquete(){
+        dimension = new Dimension(40, 30, 50);
+        peso = 8;
     }
 
     /**
@@ -29,9 +28,10 @@ public class Paquete
      *  y peso un valor aleatorio entre 2 y 8 Kg inclusive
      *  Se crea aquí el generador
      */
-    public Paquete(double alto, double ancho, double largo)    {
-        //TODO
-
+    public Paquete(double alto, double ancho, double largo){
+        dimension = new Dimension(alto, ancho, largo);
+        Random generador = new Random();
+        peso = generador.nextInt(7)+2;
     }
 
     /**
@@ -39,45 +39,39 @@ public class Paquete
      * Crea el paquete a la dimension y peso indicados
      * 
      */
-    public Paquete(Dimension dimension, double peso)    {
-        //TODO
-
+    public Paquete(Dimension dimension, double peso){
+        this.dimension = dimension;Random generador = new Random();
+        this.peso = peso;
     }
 
     /**
      * accesor para la dimensión
      */
-    public Dimension getDimension() {
+    public Dimension getDimension(){
         return this.dimension;
-
     }
 
     /**
      * accesor para el peso
      */
-    public double getPeso() {
+    public double getPeso(){
         return this.peso;
-
     }
 
     /**
      * calcula y devuelve el volumen del paquete (en cm3)
      * El volumen = alto x ancho x largo
      */
-    public double calcularVolumen() {
-       //TODO
-       return 0;
-
+    public double calcularVolumen(){
+       return dimension.getAlto()*dimension.getAncho()*dimension.getLargo();
     }
 
     /**
      * calcula y devuelve el peso volumétrico del paquete (en Kg)
      * Peso volumétrico = volumen del paquete / 5000
      */
-    public double calcularPesoVolumetrico() {
-        //TODO
-       return 0;
-
+    public double calcularPesoVolumetrico(){
+       return calcularVolumen()/5000;
     }
 
     /**
@@ -85,31 +79,38 @@ public class Paquete
      *  Siempre es el valor mayor entre su peso real y su peso volumétrico
      *      
      */
-    public double calcularPesoFacturable() {
-        //TODO
-       return 0;
-
+    public double calcularPesoFacturable(){
+        if(calcularVolumen() >= calcularPesoVolumetrico()){
+            return calcularVolumen();
+        }
+        else{
+            return calcularPesoVolumetrico();
+        }
     }
-
 
     /**
      * Devuelve una copia exacta al objeto actual
      * Se obtienen copias también de los objetos que contenga
      */
-    public Paquete obtenerCopia() {
-        //TODO
-       return null;
-
+    public Paquete obtenerCopia(){
+        Paquete copia = new Paquete(dimension, peso);
+        return copia;
     }
 
     /**
      * Representación textual del paquete
      *  (leer enunciado)
      */
-    public String toString() {
+    public String toString(){
         //TODO
-       return null;
-
+        String lineaFormateada = "Descripción del paquete\n";
+        lineaFormateada += String.format("%20s%10.2f(cm)\n", "Alto:", dimension.getAlto());
+        lineaFormateada += String.format("%20s%10.2f(cm)\n", "Ancho:", dimension.getAncho());
+        lineaFormateada += String.format("%20s%10.2f(cm)\n", "Largo:", dimension.getLargo());
+        lineaFormateada += String.format("%20s%10.2f(Kg)\n", "Peso real:", peso);
+        lineaFormateada += String.format("%20s%10.2f(cm3)\n", "Volumen:", calcularVolumen());
+        lineaFormateada += String.format("%20s%10.2f(Kg)\n", "Peso volumétrico:", calcularPesoVolumetrico());
+        return lineaFormateada;
     }
     
     /**
@@ -117,10 +118,7 @@ public class Paquete
      * Este método se incluye como método de prueba
      * de la clase Paquete
      */
-    public void print() {
+    public void print(){
         System.out.println(this.toString());
     }
-
-    
-
 }
