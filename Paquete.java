@@ -80,8 +80,8 @@ public class Paquete
      *      
      */
     public double calcularPesoFacturable(){
-        if(calcularVolumen() >= calcularPesoVolumetrico()){
-            return calcularVolumen();
+        if(getPeso() >= calcularPesoVolumetrico()){
+            return getPeso();
         }
         else{
             return calcularPesoVolumetrico();
@@ -102,14 +102,13 @@ public class Paquete
      *  (leer enunciado)
      */
     public String toString(){
-        //TODO
         String lineaFormateada = "Descripción del paquete\n";
         lineaFormateada += String.format("%20s%10.2f(cm)\n", "Alto:", dimension.getAlto());
         lineaFormateada += String.format("%20s%10.2f(cm)\n", "Ancho:", dimension.getAncho());
         lineaFormateada += String.format("%20s%10.2f(cm)\n", "Largo:", dimension.getLargo());
         lineaFormateada += String.format("%20s%10.2f(Kg)\n", "Peso real:", peso);
         lineaFormateada += String.format("%20s%10.2f(cm3)\n", "Volumen:", calcularVolumen());
-        lineaFormateada += String.format("%20s%10.2f(Kg)\n", "Peso volumétrico:", calcularPesoVolumetrico());
+        lineaFormateada += String.format("%20s%10.2f(Kg)\n\n", "Peso volumétrico:", calcularPesoVolumetrico());
         return lineaFormateada;
     }
     
