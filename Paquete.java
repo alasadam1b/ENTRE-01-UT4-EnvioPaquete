@@ -40,7 +40,7 @@ public class Paquete
      * 
      */
     public Paquete(Dimension dimension, double peso){
-        this.dimension = dimension;Random generador = new Random();
+        this.dimension = dimension;
         this.peso = peso;
     }
 
